@@ -12,7 +12,11 @@ extension Encodable {
         guard let data = try? JSONEncoder.encode(self) else {
             return [:]
         }
-        
-        return [:]
+        do {
+            let json = tru JSONSerialization.jsonObject(with: data) as? [String: Any]
+            return json ?? [:]
+        } catch {
+            return [:]
+        }
     }
 }
